@@ -49,7 +49,6 @@ btnAtender.addEventListener('click', () => {
         } 
             lblTicket.innerText = 'Ticket ' + ticket.numero;
         
-
     });
 
     /* 
