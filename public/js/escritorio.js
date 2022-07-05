@@ -4,6 +4,7 @@ const lblEscritorio = document.querySelector('h1');
 const btnAtender = document.querySelector('button');
 const lblTicket = document.querySelector('small');
 const divAlerta = document.querySelector('.alert');
+const lblPendientes = document.querySelector('#lblPendientes');
 
 
 const searchParams = new URLSearchParams(window.location.search);
@@ -33,6 +34,18 @@ socket.on('disconnect', () => {
     btnAtender.disabled = true;
 });
 
+
+socket.on('tickes-pendientes', (pendientes) => {
+
+    if(pendientes===0){
+        lblPendientes.style.display ='none';
+    }else{
+        
+        lblPendientes.style.display ='';
+        lblPendientes.innerText = pendientes;
+    }
+})
+
 socket.on('ultimo-ticket', (ultimo) => {
     //   lblNuevoTicket.innerText = 'Ticket ' + ultimo;
 });
@@ -46,9 +59,9 @@ btnAtender.addEventListener('click', () => {
         if (!ok) {
             lblTicket.innerText = 'NADIE...';
             return divAlerta.style.display = '';
-        } 
-            lblTicket.innerText = 'Ticket ' + ticket.numero;
-        
+        }
+        lblTicket.innerText = 'Ticket ' + ticket.numero;
+
     });
 
     /* 
